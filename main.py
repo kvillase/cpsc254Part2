@@ -3,7 +3,11 @@ import pygame, sys
 from pygame.locals import * 
 from button import Button
 
+
 pygame.init()
+
+
+
 
 def flappygame():
     your_score = 0
@@ -11,7 +15,19 @@ def flappygame():
     vertical = int(window_width/2)
     ground = 0
     mytempheight = 100
-  
+
+    # Define the bird skins and current skin index
+    bird_skins = ['images/bird.png', 'images/bbirdd.png', 'images/rrgb.png']
+    current_skin_index = 0
+
+    game_images = {}
+
+    game_images['flappybird'] = pygame.image.load(bird_skins[current_skin_index]).convert_alpha()
+
+    if event.type == KEYDOWN and event.key == K_RIGHT:
+        current_skin_index = (current_skin_index + 1) % len(bird_skins)
+        game_images['flappybird'] = pygame.image.load(bird_skins[current_skin_index]).convert_alpha()
+
     # Generating two pipes for blitting on window
     first_pipe = createPipe()
     second_pipe = createPipe()
